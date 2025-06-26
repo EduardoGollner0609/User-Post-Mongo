@@ -27,4 +27,15 @@ public class UserService {
                         new ResourceNotFoundException(String.format("Usuário do id %d não foi encontrado!", id)));
         return new UserDTO(user);
     }
+
+    public UserDTO create(UserDTO userDTO) {
+        User user = new User();
+        copyDtoToEntity(user, userDTO);
+        return new UserDTO(repository.save(user));
+    }
+
+    private void copyDtoToEntity(User user, UserDTO userDTO) {
+        user.setName(userDTO.getName());
+        user.setEmail(userDTO.getEmail());
+    }
 }
