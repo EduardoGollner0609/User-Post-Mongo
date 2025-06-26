@@ -2,7 +2,6 @@ package com.eduardo.user_post_mongo.services;
 
 import com.eduardo.user_post_mongo.models.dtos.PostDTO;
 import com.eduardo.user_post_mongo.models.dtos.UserDTO;
-import com.eduardo.user_post_mongo.models.entities.Post;
 import com.eduardo.user_post_mongo.models.entities.User;
 import com.eduardo.user_post_mongo.repositories.UserRepository;
 import com.eduardo.user_post_mongo.services.exceptions.ResourceNotFoundException;
