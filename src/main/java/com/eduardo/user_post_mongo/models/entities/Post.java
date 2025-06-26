@@ -30,6 +30,7 @@ public class Post {
         this.moment = moment;
         this.title = title;
         this.body = body;
+        this.author = author;
     }
 
     public String getId() {
