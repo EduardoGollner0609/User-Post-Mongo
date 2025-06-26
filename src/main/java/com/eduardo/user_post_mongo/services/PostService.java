@@ -7,6 +7,8 @@ import com.eduardo.user_post_mongo.services.exceptions.ResourceNotFoundException
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PostService {
 
@@ -26,4 +28,8 @@ public class PostService {
                         new ResourceNotFoundException(String.format("Post do id %s não foi encontrado!", id)));
     }
 
+    public List<PostDTO> getPostsByTitle(String title) {
+        List<Post> posts = repository.findByTitleContainingIgnoreCase(title);
+        return posts.stream().map(post -> new PostDTO(post)).toList();
+    }
 }
