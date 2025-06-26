@@ -21,17 +21,27 @@ public class UserService {
     }
 
     public UserDTO findById(String id) {
-        User user = repository
-                .findById(id)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(String.format("Usuário do id %d não foi encontrado!", id)));
+        User user = getEntityById(id);
         return new UserDTO(user);
     }
 
     public UserDTO create(UserDTO userDTO) {
         User user = new User();
         copyDtoToEntity(user, userDTO);
+        return new UserDTO(repository.insert(user));
+    }
+
+    public UserDTO update(String id, UserDTO userDTO) {
+        User user = getEntityById(id);
+        copyDtoToEntity(user, userDTO);
         return new UserDTO(repository.save(user));
+    }
+
+    private User getEntityById(String id) {
+        return repository
+                .findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(String.format("Usuário do id %s não foi encontrado!", id)));
     }
 
     private void copyDtoToEntity(User user, UserDTO userDTO) {
