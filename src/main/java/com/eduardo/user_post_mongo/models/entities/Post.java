@@ -75,8 +75,4 @@ public class Post {
     public List<Comment> getComments() {
         return comments;
     }
-
-    public void addComments(Comment comment) {
-        this.comments.add(comment);
-    }
 }
