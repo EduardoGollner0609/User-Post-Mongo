@@ -1,6 +1,8 @@
 package com.eduardo.user_post_mongo.services;
 
+import com.eduardo.user_post_mongo.models.dtos.PostDTO;
 import com.eduardo.user_post_mongo.models.dtos.UserDTO;
+import com.eduardo.user_post_mongo.models.entities.Post;
 import com.eduardo.user_post_mongo.models.entities.User;
 import com.eduardo.user_post_mongo.repositories.UserRepository;
 import com.eduardo.user_post_mongo.services.exceptions.ResourceNotFoundException;
@@ -42,6 +44,11 @@ public class UserService {
             throw new ResourceNotFoundException(String.format("Usuário do id %s não foi encontrado!", id));
         }
         repository.deleteById(id);
+    }
+
+    public List<PostDTO> getUsersPosts(String id) {
+        User user = getEntityById(id);
+        return user.getPosts().stream().map(PostDTO::new).toList();
     }
 
     private User getEntityById(String id) {

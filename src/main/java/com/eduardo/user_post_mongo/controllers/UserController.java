@@ -1,5 +1,6 @@
 package com.eduardo.user_post_mongo.controllers;
 
+import com.eduardo.user_post_mongo.models.dtos.PostDTO;
 import com.eduardo.user_post_mongo.models.dtos.UserDTO;
 import com.eduardo.user_post_mongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,5 +47,11 @@ public class UserController {
     public ResponseEntity<Void> deleteById(@PathVariable String id) {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<PostDTO>> getUsersPosts(@PathVariable String id) {
+        List<PostDTO> posts = service.getUsersPosts(id);
+        return ResponseEntity.ok(posts);
     }
 }
