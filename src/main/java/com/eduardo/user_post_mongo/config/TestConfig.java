@@ -1,6 +1,8 @@
 package com.eduardo.user_post_mongo.config;
 
+import com.eduardo.user_post_mongo.models.entities.Post;
 import com.eduardo.user_post_mongo.models.entities.User;
+import com.eduardo.user_post_mongo.repositories.PostRepository;
 import com.eduardo.user_post_mongo.repositories.UserRepository;
 import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +18,22 @@ public class TestConfig {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    private PostRepository postRepository;
+
     @PostConstruct
     public void init() {
+
         userRepository.deleteAll();
+        postRepository.deleteAll();
 
         User userEduardo = new User(null, "Eduardo", "eduardo@gmail.com");
         User userJose = new User(null, "José", "josé@gmail.com");
         User userRaphael = new User(null, "Raphael", "raphael@gmail.com");
 
         userRepository.saveAll(Arrays.asList(userEduardo, userJose, userRaphael));
+
+        Post p1 = new Post();
     }
 
 }
