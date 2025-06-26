@@ -15,7 +15,6 @@ public class PostController {
     @Autowired
     private PostService service;
 
-
     @GetMapping(value = "/{id}")
     public ResponseEntity<PostDTO> findById(@PathVariable String id) {
         PostDTO post = service.findById(id);
@@ -28,4 +27,12 @@ public class PostController {
         return ResponseEntity.ok(posts);
     }
 
+    @GetMapping(value = "/fullsearch")
+    public ResponseEntity<List<PostDTO>> fullSearch(
+            @RequestParam(name = "text", defaultValue = "") String title,
+            @RequestParam(name = "start", defaultValue = "") String start,
+            @RequestParam(name = "end", defaultValue = "") String end) {
+        List<PostDTO> posts = service.fullSearch(title, start, end);
+        return ResponseEntity.ok(posts);
+    }
 }
